@@ -1,21 +1,36 @@
 package main
 
-import "github.com/01-edu/z01"
+import (
+	"github.com/01-edu/z01"
+)
 
 func Chunk(slice []int, size int) {
-	if size <= 0 {
+	count := 0
+	newSlice, outputSlice := []int{}, [][]int{}
+
+	if size == 0 {
+		return
+	}
+	if len(slice) == 0 {
+		PrintEmpty()
 		z01.PrintRune('\n')
 		return
 	}
-	chunks := [][]int{}
-	for i := 0; i < len(slice); i += size {
-		end := i + size
-		if end > len(slice) {
-			end = len(slice)
+
+	for _, n := range slice {
+		newSlice = append(newSlice, n)
+		count++
+		if count == size {
+			outputSlice = append(outputSlice, newSlice)
+			newSlice = []int{}
+			count = 0
 		}
-		chunks = append(chunks, slice[i:end])
 	}
-	PrintChunks(chunks)
+	if len(newSlice) > 0 {
+		outputSlice = append(outputSlice, newSlice)
+	}
+
+	PrintChunks(outputSlice)
 }
 
 func Itoa(n int) string {
@@ -54,6 +69,12 @@ func PrintChunks(chunks [][]int) {
 		}
 		z01.PrintRune(']')
 	}
+	z01.PrintRune(']')
+	z01.PrintRune('\n')
+}
+
+func PrintEmpty() {
+	z01.PrintRune('[')
 	z01.PrintRune(']')
 	z01.PrintRune('\n')
 }
