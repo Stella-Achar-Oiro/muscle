@@ -37,19 +37,19 @@ func Atoi(s string) int {
 }
 
 func toRoman(num int) (string, string) {
-	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
-	sym := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	value := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	symbol := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 
 	roman := ""
 	calculation := ""
-	for i := 0; i < len(val); i++ {
-		for num >= val[i] {
-			num -= val[i]
-			roman += sym[i]
+	for i := 0; i < len(value); i++ {
+		for num >= value[i] {
+			num -= value[i]
+			roman += symbol[i]
 			if calculation != "" {
 				calculation += "+"
 			}
-			calculation += sym[i]
+			calculation += symbol[i]
 		}
 	}
 	return roman, calculation

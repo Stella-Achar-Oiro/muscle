@@ -5,8 +5,7 @@ import (
 )
 
 func Chunk(slice []int, size int) {
-	count := 0
-	newSlice, outputSlice := []int{}, [][]int{}
+	count, newSlice, outputSlice := 0, []int{}, [][]int{}
 
 	if size == 0 {
 		return
