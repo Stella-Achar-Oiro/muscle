@@ -56,7 +56,7 @@ func PrintError() {
 }
 
 func Atoi(s string) int {
-	var number int
+	q := 0
 	sign := 1
 
 	for idx, char := range s {
@@ -65,10 +65,10 @@ func Atoi(s string) int {
 		} else if char == '+' && idx == 0 {
 			sign = 1
 		} else if char >= '0' && char <= '9' {
-			number = number*10 + int(char-'0')
+			q = q*10 + int(char-'0')
 		} else {
 			return 0
 		}
 	}
-	return number * sign
+	return q * sign
 }
