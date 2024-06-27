@@ -1,23 +1,20 @@
 package main
 
-import (
-	"github.com/01-edu/z01"
-)
+import "fmt"
 
 func Chunk(slice []int, size int) {
-	count, newSlice, outputSlice := 0, []int{}, [][]int{}
-
 	if size == 0 {
+		fmt.Println()
 		return
 	}
 	if len(slice) == 0 {
-		PrintEmpty()
-		z01.PrintRune('\n')
+		fmt.Println(slice)
 		return
 	}
+	count, newSlice, outputSlice := 0, []int{}, [][]int{}
 
-	for _, n := range slice {
-		newSlice = append(newSlice, n)
+	for _, r := range slice {
+		newSlice = append(newSlice, r)
 		count++
 		if count == size {
 			outputSlice = append(outputSlice, newSlice)
@@ -28,54 +25,7 @@ func Chunk(slice []int, size int) {
 	if len(newSlice) > 0 {
 		outputSlice = append(outputSlice, newSlice)
 	}
-
-	PrintChunks(outputSlice)
-}
-
-func Itoa(n int) string {
-	if n == 0 {
-		return "0"
-	}
-	sign := ""
-	if n < 0 {
-		sign = "-"
-		n = -n
-	}
-	q := ""
-	for n > 0 {
-		digits := n % 10
-		q = string(rune('0'+digits)) + q
-		n /= 10
-	}
-	return sign + q
-}
-
-func PrintChunks(chunks [][]int) {
-	z01.PrintRune('[')
-	for i, chunk := range chunks {
-		if i > 0 {
-			z01.PrintRune(' ')
-		}
-		z01.PrintRune('[')
-		for j, v := range chunk {
-			if j > 0 {
-				z01.PrintRune(' ')
-			}
-			q := Itoa(v)
-			for _, r := range q {
-				z01.PrintRune(r)
-			}
-		}
-		z01.PrintRune(']')
-	}
-	z01.PrintRune(']')
-	z01.PrintRune('\n')
-}
-
-func PrintEmpty() {
-	z01.PrintRune('[')
-	z01.PrintRune(']')
-	z01.PrintRune('\n')
+	fmt.Println(outputSlice)
 }
 
 func main() {

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	if len(os.Args) <=1 {
+	if len(os.Args) <= 1 {
 		return
 	}
 	lastparam := os.Args[len(os.Args)-1]

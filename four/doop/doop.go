@@ -4,40 +4,17 @@ import (
 	"os"
 )
 
-func Itoa(n int) string {
-	if n == 0 {
-		return "0"
+func main() {
+	if len(os.Args) != 4 {
+		return
 	}
-	sign := ""
-	if n < 0 {
-		sign = "-"
-		n = -n
-	}
-	q := ""
-	for n > 0 {
-		digits := n % 10
-		q = string(rune('0'+digits)) + q
-		n /= 10
-	}
-	return sign + q
-}
+	value1, operator, value2 := os.Args[1], os.Args[2], os.Args[3]
 
-func Atoi(s string) (int, bool) {
-	sign := 1
-	q := 0
+	result := Calculation(value1, operator, value2)
 
-	for i, v := range s {
-		if v == '-' && i == 0 {
-			sign = -1
-		} else if v == '+' && i == 0 {
-			sign = 1
-		} else if v >= '0' && v <= '9' {
-			q = q*10 + int(v-'0')
-		} else {
-			return 0, false
-		}
+	if result != "" {
+		PrintStr(result)
 	}
-	return sign * q, true
 }
 
 func PrintStr(s string) {
@@ -52,14 +29,11 @@ func Calculation(a, operator, b string) string {
 	if !ok1 || !ok2 {
 		return ""
 	}
+	const maximumInt = 9223372036854775807
 
-	// Define max int64 value to handle large numbers
-	const maxInt64 = 9223372036854775807
-
-	if (value1 >= maxInt64 || value1 <= -maxInt64) || (value2 >= maxInt64 || value2 <= -maxInt64) {
+	if (value1 >= maximumInt || value1 <= -maximumInt) || (value2 >= maximumInt || value2 <= -maximumInt) {
 		return ""
 	}
-
 	q := 0
 	switch operator {
 	case "+":
@@ -84,15 +58,38 @@ func Calculation(a, operator, b string) string {
 	return Itoa(q)
 }
 
-func main() {
-	if len(os.Args) != 4 {
-		return
-	}
-	value1, operator, value2 := os.Args[1], os.Args[2], os.Args[3]
+func Atoi(s string) (int, bool) {
+	q := 0
+	sign := 1
 
-	result := Calculation(value1, operator, value2)
-
-	if result != "" {
-		PrintStr(result)
+	for i, v := range s {
+		if v == '-' && i == 0 {
+			sign = '-'
+		} else if v == '+' && i == 0 {
+			sign = '+'
+		} else if v >= '0' && v <= '9' {
+			q = q*10 + int(v-'0')
+		} else {
+			return 0, false
+		}
 	}
+	return sign * q, true
+}
+
+func Itoa(n int) string {
+	if n == 0 {
+		return "0"
+	}
+	sign := ""
+	if n < 0 {
+		sign = "-"
+		n = -n
+	}
+	q := ""
+	for n > 0 {
+		digits := n % 10
+		q = string(rune(digits+'0')) + q
+		n /= 10
+	}
+	return sign + q
 }

@@ -4,6 +4,7 @@ import "fmt"
 
 func Rot13(s string) string {
 	q := []rune(s)
+
 	for i, v := range s {
 		if v >= 'a' && v <= 'z' {
 			q[i] = 'a' + (v-'a'+13)%26
@@ -15,5 +16,5 @@ func Rot13(s string) string {
 }
 
 func main() {
-	fmt.Println(Rot13("abckzv"))
+	fmt.Println(Rot13("AchatOiro"))
 }

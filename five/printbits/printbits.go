@@ -1,49 +1,55 @@
-// package main
-
-// import (
-// 	"github.com/01-edu/z01"
-// )
-
-// func PrintBits(octe byte) {
-// 	for i := 7; i >= 0; i-- {
-// 		if octe&(1<<i) != 0 {
-// 			z01.PrintRune('1')
-// 		} else {
-// 			z01.PrintRune('0')
-// 		}
-// 	}
-// 	z01.PrintRune('\n')
-// }
-
-// func main() {
-// 	PrintBits(2) // Example usage
-// }
-
 package main
 
 import (
 	"os"
+	"github.com/01-edu/z01"
 )
 
 func main() {
 	if len(os.Args) != 2 {
-		os.Exit(1)
+		return
 	}
 
 	arg := os.Args[1]
-	num := 0
-	for _, c := range arg {
-		if c < '0' || c > '9' {
-			print("00000000")
-			return
-		}
-		num = num*10 + int(c-'0')
+	num, valid := Atoi(arg)
+	if !valid {
+		PrintBinaryString("00000000")
+		return
 	}
 
-	binary := make([]byte, 8)
-	for i := 7; i >= 0; i-- {
-		bit := byte((num >> uint(i)) & 1)
-		binary[7-i] = bit + '0'
+	binary := IntToBinary(num)
+	PrintBinaryString(binary)
+}
+
+// Atoi converts a string to an integer without using strconv package.
+func Atoi(s string) (int, bool) {
+	var result int
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return 0, false
+		}
+		result = result*10 + int(c-'0')
 	}
-	print(string(binary))
+	return result, true
+}
+
+// IntToBinary converts an integer to an 8-bit binary string.
+func IntToBinary(n int) string {
+	binary := make([]rune, 8)
+	for i := 7; i >= 0; i-- {
+		if n%2 == 1 {
+			binary[i] = '1'
+		} else {
+			binary[i] = '0'
+		}
+		n /= 2
+	}
+	return string(binary)
+}
+
+// PrintBinaryString prints a string using z01.PrintRune.
+func PrintBinaryString(s string) {
+	for _, c := range s {
+		z01.PrintRune(c)
+	}
 }

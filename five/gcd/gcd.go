@@ -19,8 +19,19 @@ func main() {
 	gcd := GCD(num1, num2)
 
 	number := Itoa(gcd)
-	for _, c := range number {
-		z01.PrintRune(c)
+	PrintStr(number)
+}
+
+func GCD(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func PrintStr(s string) {
+	for _, char := range s {
+		z01.PrintRune(char)
 	}
 	z01.PrintRune('\n')
 }
@@ -58,11 +69,4 @@ func Itoa(n int) string {
 		n /= 10
 	}
 	return string(digits)
-}
-
-func GCD(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return a
 }

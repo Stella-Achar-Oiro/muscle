@@ -8,20 +8,20 @@ import (
 
 func main() {
 	if len(os.Args) != 2 {
-		printError()
+		PrintError()
 		return
 	}
 
 	arg := os.Args[1]
 	num := Atoi(arg)
 	if num <= 0 || num >= 4000 {
-		printError()
+		PrintError()
 		return
 	}
 
-	roman, calculation := toRoman(num)
-	printString(calculation)
-	printString(roman)
+	roman, calculation := ToRoman(num)
+	PrintStr(calculation)
+	PrintStr(roman)
 }
 
 func Atoi(s string) int {
@@ -36,36 +36,33 @@ func Atoi(s string) int {
 	return number
 }
 
-func toRoman(num int) (string, string) {
-	value := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
-	symbol := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+func ToRoman(num int) (string, string) {
+	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	sym := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 
 	roman := ""
 	calculation := ""
-	for i := 0; i < len(value); i++ {
-		for num >= value[i] {
-			num -= value[i]
-			roman += symbol[i]
+	for i := 0; i < len(val); i++ {
+		for num >= val[i] {
+			num -= val[i]
+			roman += sym[i]
 			if calculation != "" {
 				calculation += "+"
 			}
-			calculation += symbol[i]
+			calculation += sym[i]
 		}
 	}
 	return roman, calculation
 }
 
-func printString(s string) {
+func PrintStr(s string) {
 	for _, c := range s {
 		z01.PrintRune(c)
 	}
 	z01.PrintRune('\n')
 }
 
-func printError() {
+func PrintError() {
 	msg := "ERROR: cannot convert to roman digit"
-	for _, c := range msg {
-		z01.PrintRune(c)
-	}
-	z01.PrintRune('\n')
+	PrintStr(msg)
 }

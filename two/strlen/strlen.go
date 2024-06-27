@@ -1,16 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func StrLen(s string) int {
-	count := 0
+	len := 0
 	for range s {
-		count++
+		len++
 	}
-	return count
+	return len
 }
 
 func main() {
-	l := StrLen("Hello World!")
-	fmt.Println(l)
+	r := StrLen("Yes dear")
+	fmt.Println(r)
 }

@@ -10,21 +10,20 @@ func main() {
 	if len(os.Args) != 4 {
 		return
 	}
+	s, old, new := os.Args[1], os.Args[2], os.Args[3]
 
-	str, old, new := os.Args[1], os.Args[2], os.Args[3]
-
-	result := Replace(str, old, new)
-	PrintStr(result)
+	replaced := replaceAll(s, old, new)
+	PrintStr(replaced)
 }
 
-func Replace(s, old, new string) string {
+func replaceAll(s, old, new string) string {
 	if len(s) < len(old) {
 		return s
 	}
 	if s[:len(old)] == old {
-		return new + Replace(s[len(old):], old, new)
+		return new + replaceAll(s[len(old):], old, new)
 	}
-	return string(s[0]) + Replace(s[1:], old, new)
+	return string(s[0]) + replaceAll(s[len(old):], old, new)
 }
 
 func PrintStr(s string) {

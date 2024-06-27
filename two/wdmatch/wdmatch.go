@@ -10,21 +10,21 @@ func main() {
 	if len(os.Args) != 3 {
 		return
 	}
+	s1, s2, i := os.Args[1], os.Args[2], 0
 
-	str1, str2, i := os.Args[1], os.Args[2], 0
-
-	
-
-	for _, char := range str2 {
-		if i < len(str1) && char == rune(str1[i]) {
+	for _, r := range s2 {
+		if i < len(s1) && r == rune(s1[i]) {
 			i++
 		}
 	}
-
-	if i == len(str1) {
-		for _, char := range str1 {
-			z01.PrintRune(char)
-		}
-		z01.PrintRune('\n')
+	if i == len(s1) {
+		PrintStr(s1)
 	}
+}
+
+func PrintStr(s string) {
+	for _, v := range s {
+		z01.PrintRune(v)
+	}
+	z01.PrintRune('\n')
 }

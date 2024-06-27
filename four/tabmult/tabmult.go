@@ -51,3 +51,4 @@ func main() {
 		PrintStr(Itoa(i) + " x " + Itoa(num) + " = " + Itoa(table))
 	}
 }
+

@@ -8,8 +8,8 @@ import (
 
 func main() {
 	count := len(os.Args[1:])
-	Paramcount := Itoa(count)
-	PrintStr(Paramcount)
+	paramcount := Itoa(count)
+	PrintStr(paramcount)
 }
 
 func PrintStr(s string) {
@@ -25,13 +25,13 @@ func Itoa(n int) string {
 	}
 	sign := ""
 	if n < 0 {
-		n = -n
 		sign = "-"
+		n = -n
 	}
 	q := ""
 	for n > 0 {
-		digits := n % 10
-		q = string(rune('0'+digits)) + q
+		num := n % 10
+		q = string(rune('0'+num)) + q
 		n /= 10
 	}
 	return sign + q

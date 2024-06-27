@@ -11,7 +11,6 @@ func main() {
 		return
 	}
 	args := os.Args[1]
-
 	q := make([]rune, len(args))
 
 	for i, v := range args {

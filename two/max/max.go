@@ -7,15 +7,15 @@ func Max(a []int) int {
 		return 0
 	}
 	q := a[0]
-	for _, char := range a {
-		if char > q {
-			q = char
+	for _, r := range a {
+		if r > q {
+			q = r
 		}
 	}
 	return q
 }
+
 func main() {
-	a := []int{23, 32, 54, 67, 102, 231}
-	max := Max(a)
-	fmt.Println(max)
+	a := Max([]int{24, 56, 78, 98, 909})
+	fmt.Println(a)
 }

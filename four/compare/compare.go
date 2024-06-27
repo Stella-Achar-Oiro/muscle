@@ -13,7 +13,5 @@ func Compare(a, b string) int {
 }
 
 func main() {
-	fmt.Println(Compare("Hello!", "Hello!"))
-	fmt.Println(Compare("Salut!", "lut!"))
-	fmt.Println(Compare("Ola!", "Ol"))
+	fmt.Println(Compare("Achar", "Oiro"))
 }
