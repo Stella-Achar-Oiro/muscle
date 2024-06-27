@@ -24,24 +24,12 @@ func main() {
 	PrintStr(roman)
 }
 
-func Atoi(s string) int {
-	var number int
-	for _, char := range s {
-		if char >= '0' && char <= '9' {
-			number = number*10 + int(char-'0')
-		} else {
-			return -1
-		}
-	}
-	return number
-}
-
 func ToRoman(num int) (string, string) {
 	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
 	sym := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 
-	roman := ""
-	calculation := ""
+	roman, calculation := "", ""
+
 	for i := 0; i < len(val); i++ {
 		for num >= val[i] {
 			num -= val[i]
@@ -65,4 +53,22 @@ func PrintStr(s string) {
 func PrintError() {
 	msg := "ERROR: cannot convert to roman digit"
 	PrintStr(msg)
+}
+
+func Atoi(s string) int {
+	var number int
+	sign := 1
+
+	for idx, char := range s {
+		if char == '-' && idx == 0 {
+			sign = -1
+		} else if char == '+' && idx == 0 {
+			sign = 1
+		} else if char >= '0' && char <= '9' {
+			number = number*10 + int(char-'0')
+		} else {
+			return 0
+		}
+	}
+	return number * sign
 }

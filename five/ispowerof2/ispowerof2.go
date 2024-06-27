@@ -14,11 +14,10 @@ func main() {
 	IsPowerOf2 := (n > 0) && (n&(n-1) == 0)
 
 	if IsPowerOf2 {
-		z01.PrintRune('T')
+		PrintStr("true")
 	} else {
-		z01.PrintRune('F')
+		PrintStr("false")
 	}
-	z01.PrintRune('\n')
 }
 
 func BasicAtoi(s string) int {
@@ -27,4 +26,11 @@ func BasicAtoi(s string) int {
 		q = q*10 + int(r-'0')
 	}
 	return q
+}
+
+func PrintStr(s string) {
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
 }
