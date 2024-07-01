@@ -2,49 +2,50 @@ package main
 
 import (
 	"os"
+
 	"github.com/01-edu/z01"
 )
 
 func main() {
 	if len(os.Args) != 2 {
-		PrintError()
+		PrintStr("ERROR")
+		return
+	}
+	input := os.Args[1]
+	n := Atoi(input)
+	if n == 0 && input != "0" {
+		PrintStr("ERROR")
 		return
 	}
 
-	num := Atoi(os.Args[1])
-	if num == 0 && os.Args[1] != "0" {
-		PrintError()
+	PrintHex(n)
+}
+
+func PrintHex(n int) {
+	if n == 0 {
+		PrintStr("0")
 		return
 	}
 
-	PrintHex(num)
+	hex := "0123456789abcdef"
+	q := ""
+	for n > 0 {
+		q = string(hex[n%16]) + q
+		n /= 16
+	}
+	PrintStr(q)
 }
 
 func Atoi(s string) int {
-	num := 0
+	q := 0
 
 	for _, v := range s {
 		if v < '0' || v > '9' {
 			return 0
 		}
-		num = num*10 + int(v-'0')
+		q = q*10 + int(v-'0')
 	}
-	return num
-}
-
-func PrintHex(num int) {
-	if num == 0 {
-		PrintStr("0")
-		return
-	}
-
-	hexaDecimal := "0123456789abcdef"
-	hexStr := ""
-	for num > 0 {
-		hexStr = string(hexaDecimal[num%16]) + hexStr
-		num /= 16
-	}
-	PrintStr(hexStr)
+	return q
 }
 
 func PrintStr(s string) {
@@ -52,8 +53,4 @@ func PrintStr(s string) {
 		z01.PrintRune(c)
 	}
 	z01.PrintRune('\n')
-}
-
-func PrintError() {
-	PrintStr("ERROR")
 }

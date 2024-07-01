@@ -15,14 +15,14 @@ func main() {
 	if len(s) == 0 {
 		return
 	}
-	for _, char := range s {
-		if char >= 'A' && char <= 'Z' {
-			alpha = int(char - 'A')
-		} else if char >= 'a' && char <= 'z' {
-			alpha = int(char - 'a')
+	for _, r := range s {
+		if r >= 'a' && r <= 'z' {
+			alpha = int(r - 'a')
+		} else if r >= 'A' && r <= 'Z' {
+			alpha = int(r - 'A')
 		}
 		for i := 0; i <= alpha; i++ {
-			z01.PrintRune(char)
+			z01.PrintRune(r)
 		}
 	}
 	z01.PrintRune('\n')

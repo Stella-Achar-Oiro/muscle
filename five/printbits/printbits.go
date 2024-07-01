@@ -1,80 +1,44 @@
-// package main
-
-// import (
-// 	"os"
-// 	"github.com/01-edu/z01"
-// )
-
-// func main() {
-// 	if len(os.Args) != 2 {
-// 		return
-// 	}
-
-// 	arg := os.Args[1]
-// 	num, valid := Atoi(arg)
-// 	if !valid {
-// 		PrintBinaryString("00000000")
-// 		return
-// 	}
-
-// 	binary := IntToBinary(num)
-// 	PrintBinaryString(binary)
-// }
-
-// // Atoi converts a string to an integer without using strconv package.
-// func Atoi(s string) (int, bool) {
-// 	var result int
-// 	for _, c := range s {
-// 		if c < '0' || c > '9' {
-// 			return 0, false
-// 		}
-// 		result = result*10 + int(c-'0')
-// 	}
-// 	return result, true
-// }
-
-// // IntToBinary converts an integer to an 8-bit binary string.
-// func IntToBinary(n int) string {
-// 	binary := make([]rune, 8)
-// 	for i := 7; i >= 0; i-- {
-// 		if n%2 == 1 {
-// 			binary[i] = '1'
-// 		} else {
-// 			binary[i] = '0'
-// 		}
-// 		n /= 2
-// 	}
-// 	return string(binary)
-// }
-
-// // PrintBinaryString prints a string using z01.PrintRune.
-// func PrintBinaryString(s string) {
-// 	for _, c := range s {
-// 		z01.PrintRune(c)
-// 	}
-// }
-
 package main
 
 import (
-	"fmt"
 	"os"
-	"strconv"
+
+	"github.com/01-edu/z01"
 )
 
-func printBinary(num string) {
-	n, err := strconv.Atoi(num)
-	if err != nil {
-		fmt.Print("00000000")
+func main() {
+	if len(os.Args) != 2 {
 		return
 	}
-	fmt.Printf("%08b", n) // Format as 8-bit binary string
+	input := Atoi(os.Args[1])
+	PrintStr(PrintBits(input))
 }
 
-func main() {
-	if len(os.Args) > 1 {
-		printBinary(os.Args[1])
-	} else {
-		fmt.Println("No argument provided")
+func PrintBits(num int) string {
+	if num < 0 || num > 255 {
+		return "00000000"
 	}
+	bits := ""
+	for i := 7; i >= 0; i-- {
+		bits += string('0' + byte((num>>i)&1))
+	}
+	return bits
+}
+
+func Atoi(s string) int {
+	num := 0
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return -1
+		}
+		num = num*10 + int(c-'0')
+	}
+	return num
+}
+
+func PrintStr(s string) {
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
 }
